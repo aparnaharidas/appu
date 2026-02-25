@@ -3,8 +3,8 @@ name: Release Drafter to File
 on:
   push:
     branches:
-      - test-aparna
-  workflow_dispatch: 
+      - master
+  workflow_dispatch:
 
 jobs:
   update_release_file:
@@ -12,31 +12,34 @@ jobs:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Capture the formatted content from Release Drafter
+      # 1. Run Release Drafter with correct config
       - uses: release-drafter/release-drafter@v5
         id: drafter
+        with:
+          config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Checkout the repo so the bot can commit the file
+      # 2. Checkout repo
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 3. Create the file in the ./changelogs directory
+      # 3. Create changelog file
       - name: Create Changelog File
         run: |
           DATE=$(date +'%Y-%m-%d')
           mkdir -p ./changelogs
           echo "${{ steps.drafter.outputs.body }}" > ./changelogs/${DATE}.md
-          
-      # 4. Commit and Push back to your test branch
-      - name: Commit Change Log
+
+      # 4. Commit file
+      - name: Commit changelog
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           git add ./changelogs/*.md
-          git commit -m "docs: generate changelog for $(date +'%Y-%m-%d')" || exit 0
-          git push origin master
+          git commit -m "chore: add changelog for ${DATE}" || echo "No changes to commit"
+          git push
