@@ -5,15 +5,18 @@ categories:
   - title: "### What's New"
     labels:
       - 'feature'
-    # This override adds the PR body/description specifically for this category
+    # For features, we show the Title and the full Description
     change-template: |
       * **$TITLE**
         $BODY
   - title: '#### $VALUE' 
     labels:
-      - 'improvement/*'
-    # Standard items only get the title
+      - 'area/*'
+    # For bugs/others, we just show the Title
     change-template: '* $TITLE'
+
+# Remove the (@$AUTHOR) if it exists globally
+change-template: '* $TITLE'
 
 template: |
   # Production Release — $DATE
