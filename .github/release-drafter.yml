@@ -10,41 +10,42 @@ categories:
       **$TITLE**
       $BODY
 
-  # ===== Changes Categories =====
+  # ===== Changes =====
   - title: "#### Screening"
     labels:
       - 'screening'
     change-template: |
-      * **[$LABEL]** $TITLE
+      * **[$TYPE]** $TITLE
 
   - title: "#### Credits & Billing"
     labels:
-      - 'billing'
       - 'credits'
+      - 'billing'
     change-template: |
-      * **[$LABEL]** $TITLE
+      * **[$TYPE]** $TITLE
 
   - title: "#### ATS"
     labels:
       - 'ats'
       - 'integration'
     change-template: |
-      * **[$LABEL]** $TITLE
+      * **[$TYPE]** $TITLE
 
   - title: "#### Core Platform"
     labels:
       - 'core'
       - 'platform'
     change-template: |
-      * **[$LABEL]** $TITLE
+      * **[$TYPE]** $TITLE
 
-# Fallback for uncategorized
+# ===== Unlabeled fallback =====
 change-template: |
-  * **[$LABEL]** $TITLE
+  * $TITLE
 
 template: |
   # Production Release — $DATE
 
+  ### What's new
   $CHANGES
 
   ### Changes
