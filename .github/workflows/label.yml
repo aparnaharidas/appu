@@ -1,5 +1,44 @@
+name: Release Drafter to File
+
 on:
   push:
     branches:
-      - test-aparna
-  workflow_dispatch: # This adds a "Run workflow" button in the GitHub UI
+      - test-aparna  # This triggers when you push or merge to this branch
+  workflow_dispatch: # This adds the "Run workflow" button in the UI
+
+jobs:
+  update_release_file:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Capture the formatted content from Release Drafter
+      - uses: release-drafter/release-drafter@v5
+        id: drafter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Checkout the repo so we can commit files
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 3. Create the file in the ./changelogs directory
+      - name: Create Changelog File
+        run: |
+          DATE=$(date +'%Y-%m-%d')
+          # Create the folder if it doesn't exist
+          mkdir -p ./changelogs
+          # Create the file with the drafter's output
+          echo "${{ steps.drafter.outputs.body }}" > ./changelogs/${DATE}.md
+          
+      # 4. Commit and Push the new file back to the branch
+      - name: Commit Change Log
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add ./changelogs/*.md
+          git commit -m "docs: add changelog for $(date +'%Y-%m-%d')" || exit 0
+          git push origin test-aparna
