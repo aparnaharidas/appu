@@ -8,14 +8,15 @@ categories:
     change-template: |
       * **$TITLE**
         $BODY
-  - title: '### $VALUE' # This ensures the label name becomes a ### heading
+  - title: '### $VALUE'
     labels:
       - 'improvement/*'
     change-template: |
       * **$TITLE**
         $BODY
 
-# Remove the (@$AUTHOR) if it exists globally
+# This handles anything NOT labeled 'feature' or 'improvement/*'
+# We remove (@$AUTHOR) here to ensure it never shows up.
 change-template: '* $TITLE'
 
 template: |
