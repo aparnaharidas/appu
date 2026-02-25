@@ -1,17 +1,19 @@
 name-template: 'Production Release — $DATE'
 tag-template: 'v$RESOLVED_VERSION'
 
-# This defines the headers in your changelog
 categories:
   - title: "### What's New"
     labels:
       - 'feature'
+    # This override adds the PR body/description specifically for this category
+    change-template: |
+      * **$TITLE**
+        $BODY
   - title: '#### $VALUE' 
     labels:
-      - 'improvement/*'
-
-# This uses your PR titles as the bullet points
-change-template: '* $TITLE'
+      - 'area/*'
+    # Standard items only get the title
+    change-template: '* $TITLE'
 
 template: |
   # Production Release — $DATE
