@@ -1,0 +1,19 @@
+name-template: 'Production Release — $DATE'
+tag-template: 'v$RESOLVED_VERSION'
+
+# This defines the headers in your changelog
+categories:
+  - title: "### What's New"
+    labels:
+      - 'feature'
+  - title: '#### $VALUE' 
+    labels:
+      - 'area/*'
+
+# This uses your PR titles as the bullet points
+change-template: '* $TITLE'
+
+template: |
+  # Production Release — $DATE
+
+  $CHANGES
