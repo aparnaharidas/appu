@@ -2,26 +2,51 @@ name-template: 'Production Release — $DATE'
 tag-template: 'v$RESOLVED_VERSION'
 
 categories:
-  - title: "### What's New" # This stays at the top level
+  # ===== What's New (Top section) =====
+  - title: "### What's new"
     labels:
       - 'feature'
     change-template: |
-      * **$TITLE**
-        $BODY
-  - title: '#### $VALUE' # We use #### here so they nested under the ### Changes header
-    labels:
-      - 'improvement/*'
-    change-template: |
-      * **$TITLE**
-        $BODY
+      **$TITLE**
+      $BODY
 
-# Global template for anything not caught in categories
-change-template: '* $TITLE'
+  # ===== Changes Sections =====
+  - title: "#### Screening"
+    labels:
+      - 'screening'
+    change-template: |
+      * **[$LABEL]** $TITLE
+
+  - title: "#### Credits & Billing"
+    labels:
+      - 'billing'
+      - 'credits'
+    change-template: |
+      * **[$LABEL]** $TITLE
+
+  - title: "#### ATS"
+    labels:
+      - 'ats'
+      - 'integration'
+    change-template: |
+      * **[$LABEL]** $TITLE
+
+  - title: "#### Core Platform"
+    labels:
+      - 'core'
+      - 'platform'
+    change-template: |
+      * **[$LABEL]** $TITLE
+
+# Fallback for anything uncategorized
+change-template: |
+  * **[$LABEL]** $TITLE
 
 template: |
   # Production Release — $DATE
 
+  ### What's new
   $CHANGES
 
   ### Changes
-  $CHANGES
+  $UNCATEGORIZED_CHANGES
