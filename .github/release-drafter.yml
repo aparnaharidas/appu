@@ -2,7 +2,7 @@ name-template: 'Production Release — $DATE'
 tag-template: 'v$RESOLVED_VERSION'
 
 categories:
-  # ===== What's New (Top section) =====
+  # ===== What's New =====
   - title: "### What's new"
     labels:
       - 'feature'
@@ -10,7 +10,7 @@ categories:
       **$TITLE**
       $BODY
 
-  # ===== Changes Sections =====
+  # ===== Changes Categories =====
   - title: "#### Screening"
     labels:
       - 'screening'
@@ -38,14 +38,13 @@ categories:
     change-template: |
       * **[$LABEL]** $TITLE
 
-# Fallback for anything uncategorized
+# Fallback for uncategorized
 change-template: |
   * **[$LABEL]** $TITLE
 
 template: |
   # Production Release — $DATE
 
-  ### What's new
   $CHANGES
 
   ### Changes
