@@ -5,15 +5,15 @@ categories:
   - title: "### What's New"
     labels:
       - 'feature'
-    # For features, we show the Title and the full Description
     change-template: |
       * **$TITLE**
         $BODY
-  - title: '#### $VALUE' 
+  - title: '### $VALUE' # This ensures the label name becomes a ### heading
     labels:
       - 'improvement/*'
-    # For bugs/others, we just show the Title
-    change-template: '* $TITLE'
+    change-template: |
+      * **$TITLE**
+        $BODY
 
 # Remove the (@$AUTHOR) if it exists globally
 change-template: '* $TITLE'
