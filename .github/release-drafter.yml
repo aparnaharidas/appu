@@ -11,7 +11,7 @@ categories:
         $BODY
   - title: '#### $VALUE' 
     labels:
-      - 'area/*'
+      - 'improvement/*'
     # Standard items only get the title
     change-template: '* $TITLE'
 
