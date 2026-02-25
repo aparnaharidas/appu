@@ -1,0 +1,5 @@
+on:
+  push:
+    branches:
+      - test-aparna
+  workflow_dispatch: # This adds a "Run workflow" button in the GitHub UI
