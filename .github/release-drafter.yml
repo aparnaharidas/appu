@@ -2,24 +2,26 @@ name-template: 'Production Release — $DATE'
 tag-template: 'v$RESOLVED_VERSION'
 
 categories:
-  - title: "### What's New"
+  - title: "### What's New" # This stays at the top level
     labels:
       - 'feature'
     change-template: |
       * **$TITLE**
         $BODY
-  - title: '### $VALUE'
+  - title: '#### $VALUE' # We use #### here so they nested under the ### Changes header
     labels:
       - 'improvement/*'
     change-template: |
       * **$TITLE**
         $BODY
 
-# This handles anything NOT labeled 'feature' or 'improvement/*'
-# We remove (@$AUTHOR) here to ensure it never shows up.
+# Global template for anything not caught in categories
 change-template: '* $TITLE'
 
 template: |
   # Production Release — $DATE
 
+  $CHANGES
+
+  ### Changes
   $CHANGES
