@@ -8,7 +8,7 @@ categories:
       - 'feature'
   - title: '#### $VALUE' 
     labels:
-      - 'area/*'
+      - 'improvement/*'
 
 # This uses your PR titles as the bullet points
 change-template: '* $TITLE'
